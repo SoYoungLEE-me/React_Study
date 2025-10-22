@@ -1,14 +1,182 @@
-.box {
-  border: 1px solid black;
-  width: 500px;
-}
+/*전체 컨테이너 설정*/
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Jua&display=swap");
 
-.item-img {
-  width: 400px;
-  height: 400px;
-}
-
-.main {
+body {
+  font-family: "Inter", "Jua", sans-serif;
+  background-color: #1a1a2e;
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 600px;
+  background-color: #2e3a5a;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #e94560;
+  text-shadow: 0 0 10px rgba(233, 69, 96, 0.7);
+  margin-bottom: 20px;
+}
+
+/*스코어보드 */
+.score-board {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: #16213e;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.score-item {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.score-item span {
+  font-size: 2rem;
+  color: #ffffff;
+  text-shadow: 0 0 5px #e94560;
+}
+
+/*결과 안내 문구*/
+.result-message {
+  background-color: #2e3a5a;
+  min-height: 60px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/*선택 결과 화면 박스*/
+.display-area {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 20px;
+}
+
+.display-box {
+  background-color: #16213e;
+  padding: 20px;
+  border-radius: 10px;
+  width: 45%;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.display-icon {
+  font-size: 4rem;
+  min-height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-box.win {
+  box-shadow: 0 0 20px 6px rgba(0, 255, 0, 0.582);
+}
+
+.display-box.lose {
+  box-shadow: 0 0 20px 6px rgba(255, 0, 0, 0.826);
+}
+
+.display-box.tie {
+  box-shadow: 0 0 20px 6px rgba(128, 128, 128, 0.6);
+}
+
+/*선택 버튼*/
+.choices {
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.choice-btn {
+  background-color: #e94560;
+  color: #ffffff;
+  border: none;
+  padding: 15px 10px;
+  width: 100%;
+  border-radius: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 6px 0 #903749;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.choice-btn:hover {
+  background-color: #f06292;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #903749;
+}
+
+.choice-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #903749; /*눌리는 느낌*/
+}
+
+.choice-icon {
+  font-size: 3rem;
+  margin-bottom: 5px;
+  line-height: 1;
+}
+
+/*리셋 버튼*/
+.reset-btn {
+  background-color: #0f3460;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 17px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 0 #16213e;
+}
+.reset-btn:hover {
+  background-color: #44acf1;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #0f3460;
+}
+
+.reset-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 6px 0 #0f3460;
 }

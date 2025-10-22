@@ -12,50 +12,132 @@ import Box from "./components/Box";
 const choice = {
   rock: {
     name: "Rock",
-    img: "https://store.clickhole.com/cdn/shop/files/Untitleddesign_6.png?v=1693423886",
+    icon: "✊",
   },
   scissors: {
-    name: "Sissors",
-    img: "https://i.namu.wiki/i/PGp3JnsDa9eaMKBC1OwnSU4M0vLE0d_40ehrl0aUYum98U6tg0Nnl8W6_c0bQk2Bp9mQCMTe7eQt32pszxoQGw.webp",
+    name: "Scissors",
+    icon: "✌️",
   },
   paper: {
     name: "Paper",
-    img: "https://cdn11.bigcommerce.com/s-2i5mq6440u/images/stencil/2048x2048/products/3762/9095/PlasticPaper-CutSheet__18809.1597757191.png?c=2",
+    icon: "🖐️",
   },
 };
 
 function App() {
+  const randomChoice = () => {
+    const keys = Object.keys(choice); //Object.keys()는 객체의 key들을 배열로 바꿔주는 함수
+    const randomIndex = Math.floor(Math.random() * keys.length); //0 이상 ~ 3 미만의 정수
+    const randomKey = keys[randomIndex]; //생성한 인덱스로 배열의 값을 저장
+    return choice[randomKey]; //객체에서 저장되 배열의 값, 즉 key로 접근 가능
+  };
+
+  const play = (userSelect) => {
+    const userPick = userSelect;
+    const computerPick = randomChoice();
+
+    setUserChoice(userPick);
+    setComputerChoice(computerPick);
+
+    const gameResult = judgement(userPick, computerPick);
+    setResult(gameResult);
+
+    if (gameResult === "win") {
+      setUserScore((prev) => prev + 1);
+    } else if (gameResult === "lose") {
+      setComputerScore((prev) => prev + 1);
+    }
+  };
+
+  const judgement = (user, computer) => {
+    if (user.name === computer.name) return "tie";
+    else if (
+      (user.name === "Rock" && computer.name === "Scissors") ||
+      (user.name === "Scissors" && computer.name === "Paper") ||
+      (user.name === "Paper" && computer.name === "Rock")
+    )
+      return "win";
+    else return "lose";
+  };
+
+  const reset = () => {
+    setUserChoice(null);
+    setComputerChoice(null);
+    setResult(null);
+    setUserScore(0);
+    setComputerScore(0);
+  };
+
   const [userChoice, setUserChoice] = useState(null);
+  const [computerChoice, setComputerChoice] = useState(null);
+  const [result, setResult] = useState(null);
+  const [userScore, setUserScore] = useState(0);
+  const [computerScore, setComputerScore] = useState(0);
 
   return (
-    <>
-      <div className="main">
-        <Box title="YOU" item={userChoice} />
+    <div className="game-container">
+      <h1>Rock! Scissors! Paper!</h1>
+      {/* 스코어 보드 */}
+      <div className="score-board">
+        <div className="score-item">
+          <p>나(Player)</p>
+          <span>{userScore}</span>
+        </div>
+        <div className="score-item">
+          <p>컴퓨터(AI)</p>
+          <span>{computerScore}</span>
+        </div>
       </div>
-      <div className="main">
-        <button
-          onClick={() => {
-            setUserChoice(choice.scissors);
-          }}
-        >
-          가위
+
+      {/*결과 안내 문구*/}
+      <div className="result-message">
+        {!result && "가위바위보를 시작해보세요!"}
+        {result === "win" && "당신이 이겼습니다! 🎉"}
+        {result === "lose" && "컴퓨터가 이겼습니다! 🤖"}
+        {result === "tie" && "비겼습니다! 😐"}
+      </div>
+
+      {/*버튼 선택 결과*/}
+      <div className="display-area">
+        <Box
+          title="COMPUTER"
+          item={computerChoice}
+          result={
+            result
+              ? result === "win"
+                ? "lose"
+                : result === "lose"
+                ? "win"
+                : "tie"
+              : ""
+          }
+        />
+        <Box title="YOU" item={userChoice} result={result} />
+      </div>
+
+      {/*버튼*/}
+      <div className="choices">
+        <button className="choice-btn" onClick={() => play(choice.scissors)}>
+          <span class="choice-icon">✌️</span> 가위
         </button>
-        <button
-          onClick={() => {
-            setUserChoice(choice.rock);
-          }}
-        >
-          바위
+        <button className="choice-btn" onClick={() => play(choice.rock)}>
+          <span class="choice-icon">✊</span> 바위
         </button>
-        <button
-          onClick={() => {
-            setUserChoice(choice.paper);
-          }}
-        >
-          보
+        <button className="choice-btn" onClick={() => play(choice.paper)}>
+          <span class="choice-icon">✋</span> 보
         </button>
       </div>
-    </>
+
+      {/*리셋버튼*/}
+      <button
+        className="reset-btn"
+        onClick={() => {
+          reset();
+        }}
+      >
+        Reset
+      </button>
+    </div>
   );
 }
 
