@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCurrentWeather } from "./api/weather";
-import WeatherBox from "./components/weatherBox";
+import WeatherBox from "./components/WeatherBox";
 import "./App.css";
 
 //1. 앱이 실행되자마자 현재위치기반의 날씨가 보인다.
